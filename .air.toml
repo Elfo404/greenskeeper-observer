@@ -1,0 +1,11 @@
+[build]
+# build = "make build"
+# bin = "dist/greenskeepr"
+include_ext = ["go"]
+exclude_dir = ["tmp", "bin"]
+
+[log]
+time = true
+
+[misc]
+clean_on_exit = true

@@ -1,0 +1,5 @@
+tmp
+/dist/**
+!/dist/.gitkeep
+*.log
+.env

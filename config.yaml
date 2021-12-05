@@ -1,0 +1,3 @@
+sensors:
+  # MACADDRESS: "Alias"
+  A0:19:E3:82:0F:E5: "Carrots"
