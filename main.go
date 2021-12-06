@@ -43,19 +43,16 @@ func getScanResultHandler(sensors Sensors) func(adapter *bluetooth.Adapter, resu
 	sensorCounters := map[string]int{}
 
 	return func(adapter *bluetooth.Adapter, result bluetooth.ScanResult) {
-		if result.LocalName() == "BLE Sensor" {
-			address := result.Address.String()
+		address := result.Address.String()
+		alias, exists := sensors[address]
+
+		if exists {
 			data := result.AdvertisementPayload.GetManufacturerData(0)
 			counter := int(data[0])
 
 			temperature := float32(readInt16(data[1:3])) / 100
 			humidity := float32(binary.BigEndian.Uint16(data[3:5])) / 100
 			soilMoisture := float32(binary.BigEndian.Uint16(data[5:7])) / 100
-
-			alias, exists := sensors[address]
-			if !exists {
-				alias = address
-			}
 
 			if int(counter) != sensorCounters[address] {
 				sensorCounters[address] = counter
